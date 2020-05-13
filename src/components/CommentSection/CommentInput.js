@@ -2,25 +2,24 @@
 import React, { useState } from 'react';
 import Comment from './Comment';
 
-const CommentInput = () => {
+const CommentInput = (props) => {
 
   const [comment, updateComment] = useState("");
-  const user = "Anh";
 
-  const obj = {
-        username: `${user}`,
-        text: `${comment}`,
+  var user = 'Anh';
+
+  var obj = {
+    username: `${user}`,
+    text: `${comment}`
   }
 
-  const submitComment = (e) => (
-    e.preventDefault(),
-    console.log(obj),
-    <Comment comment={obj}/>,
-    updateComment("")
-  );
 
   return (
-    <form className="comment-form" onSubmit={submitComment}>
+    <form className="comment-form" onSubmit={(e) => {
+    e.preventDefault();
+    props.submitComment(obj)
+    updateComment("");
+    }}>
       <input
         type="text"
         value={comment}

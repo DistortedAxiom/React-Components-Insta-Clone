@@ -6,14 +6,18 @@ import "./Comment.css";
 
 const CommentSection = props => {
   // Add state for the comments
-  const [comments] = useState(props.comments);
+  const [comments, setComments] = useState(props.comments);
+
+  const submitComment = (comment) => {
+    setComments([...comments, comment])
+  }
 
   return (
     <div>
       {comments.map((el, i) => (
         <Comment key={i} comment={el} />
       ))}
-      <CommentInput />
+      <CommentInput submitComment={submitComment}/>
     </div>
   );
 };
